@@ -1,0 +1,322 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rastreador Simples de Metas e Aportes",
+    "description": "API REST para cadastro de ativos, registro de rendimentos/aportes e cálculo automático de rentabilidade acumulada.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor Local"
+    }
+  ],
+  "paths": {
+    "/api/ativos": {
+      "post": {
+        "summary": "Cadastra um novo ativo ou atualiza a quantidade e preço médio ponderado se já existente.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastroAtivo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ativo cadastrado ou atualizado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ativo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida (dados faltando ou incorretos).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos os ativos cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Lista de ativos cadastrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ativo"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rendimentos": {
+      "post": {
+        "summary": "Registra uma nova entrada mensal (rendimento ou aporte).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastroRendimento"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Rendimento ou aporte registrado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rendimento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida (mês no formato errado, tipo incorreto ou valor menor/igual a zero).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos os rendimentos e aportes registrados.",
+        "responses": {
+          "200": {
+            "description": "Lista de rendimentos e aportes registrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rendimento"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/painel": {
+      "get": {
+        "summary": "Retorna o cálculo automático de total acumulado, rendimentos, aportes e porcentagem de rendimento.",
+        "responses": {
+          "200": {
+            "description": "Dados do painel calculados com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DadosPainel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CadastroAtivo": {
+        "type": "object",
+        "required": [
+          "codigo",
+          "nome",
+          "quantidade",
+          "precoMedio"
+        ],
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "example": "MXRF11",
+            "description": "Código do ativo"
+          },
+          "nome": {
+            "type": "string",
+            "example": "Maxi Renda FII",
+            "description": "Nome do ativo ou categoria"
+          },
+          "quantidade": {
+            "type": "number",
+            "example": 100,
+            "description": "Quantidade total do ativo"
+          },
+          "precoMedio": {
+            "type": "number",
+            "example": 10.5,
+            "description": "Preço médio de aquisição"
+          }
+        }
+      },
+      "Ativo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "codigo": {
+            "type": "string",
+            "example": "MXRF11"
+          },
+          "nome": {
+            "type": "string",
+            "example": "Maxi Renda FII"
+          },
+          "quantidade": {
+            "type": "number",
+            "example": 100
+          },
+          "precoMedio": {
+            "type": "number",
+            "example": 10.5
+          }
+        }
+      },
+      "CadastroRendimento": {
+        "type": "object",
+        "required": [
+          "mes",
+          "tipo",
+          "valor"
+        ],
+        "properties": {
+          "mes": {
+            "type": "string",
+            "example": "2026-08",
+            "description": "Mês de competência no formato AAAA-MM"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "rendimento",
+              "aporte"
+            ],
+            "example": "rendimento",
+            "description": "Tipo de registro: rendimento ou aporte"
+          },
+          "valor": {
+            "type": "number",
+            "example": 150.75,
+            "description": "Valor monetário do registro"
+          }
+        }
+      },
+      "Rendimento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "mes": {
+            "type": "string",
+            "example": "2026-08"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "rendimento"
+          },
+          "valor": {
+            "type": "number",
+            "example": 150.75
+          }
+        }
+      },
+      "DadosPainel": {
+        "type": "object",
+        "properties": {
+          "totalInvestido": {
+            "type": "number",
+            "example": 1050,
+            "description": "Soma de quantidade * precoMedio de todos os ativos"
+          },
+          "totalRendimentos": {
+            "type": "number",
+            "example": 150.75,
+            "description": "Soma de todos os rendimentos cadastrados"
+          },
+          "totalAportes": {
+            "type": "number",
+            "example": 500,
+            "description": "Soma de todos os aportes cadastrados"
+          },
+          "totalAcumulado": {
+            "type": "number",
+            "example": 1200.75,
+            "description": "Soma do total investido com total de rendimentos"
+          },
+          "porcentagemRendimento": {
+            "type": "number",
+            "example": 14.36,
+            "description": "Porcentagem obtida via (totalRendimentos / totalInvestido) * 100"
+          }
+        }
+      },
+      "Erro": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Mensagem detalhada sobre o erro ocorrido."
+          }
+        }
+      }
+    }
+  }
+}
