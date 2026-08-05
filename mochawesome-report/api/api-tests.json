@@ -1,0 +1,453 @@
+{
+  "stats": {
+    "suites": 7,
+    "tests": 10,
+    "passes": 10,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-08-05T00:05:14.646Z",
+    "end": "2026-08-05T00:05:15.160Z",
+    "duration": 514,
+    "testsRegistered": 10,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4887107d-256d-4dcb-801e-fd226789c3ea",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e7b1acd6-a82d-4da1-886a-94f9f8364831",
+          "title": "API - Ativos",
+          "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\ativos.test.js",
+          "file": "\\tests\\api\\ativos.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"API - Ativos\"",
+              "fullTitle": "API - Ativos \"before each\" hook in \"API - Ativos\"",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "restoreDatabase();",
+              "err": {},
+              "uuid": "9802f7b6-ec1d-4baa-b63f-f56420456537",
+              "parentUUID": "e7b1acd6-a82d-4da1-886a-94f9f8364831",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "e224d9bf-5a1e-45bd-a8b5-1b180e84a3c9",
+              "title": "POST /api/ativos",
+              "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\ativos.test.js",
+              "file": "\\tests\\api\\ativos.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve cadastrar um ativo válido retornando status 201",
+                  "fullTitle": "API - Ativos POST /api/ativos deve cadastrar um ativo válido retornando status 201",
+                  "timedOut": false,
+                  "duration": 109,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.50\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body).to.have.property('id');\nexpect(response.body.codigo).to.equal('MXRF11');\nexpect(response.body.quantidade).to.equal(100);",
+                  "err": {},
+                  "uuid": "19bbfbb8-2a67-464f-8f9f-640557b7619c",
+                  "parentUUID": "e224d9bf-5a1e-45bd-a8b5-1b180e84a3c9",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar status 400 em caso de payload inválido",
+                  "fullTitle": "API - Ativos POST /api/ativos deve retornar status 400 em caso de payload inválido",
+                  "timedOut": false,
+                  "duration": 19,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: '',\n    nome: 'Maxi Renda FII',\n    quantidade: -10,\n    precoMedio: 10.50\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('error');",
+                  "err": {},
+                  "uuid": "640ed8e1-04aa-47da-a887-446cc59f28f0",
+                  "parentUUID": "e224d9bf-5a1e-45bd-a8b5-1b180e84a3c9",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "19bbfbb8-2a67-464f-8f9f-640557b7619c",
+                "640ed8e1-04aa-47da-a887-446cc59f28f0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 128,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "7bcab9dd-5715-4c75-89e9-fe1c9a052c6d",
+              "title": "GET /api/ativos",
+              "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\ativos.test.js",
+              "file": "\\tests\\api\\ativos.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve listar todos os ativos cadastrados",
+                  "fullTitle": "API - Ativos GET /api/ativos deve listar todos os ativos cadastrados",
+                  "timedOut": false,
+                  "duration": 109,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// Cadastra primeiro\nawait request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.50\n  });\nconst response = await request(app).get('/api/ativos');\nexpect(response.status).to.equal(200);\nexpect(response.body).to.be.an('array');\nexpect(response.body.length).to.equal(1);\nexpect(response.body[0].codigo).to.equal('MXRF11');",
+                  "err": {},
+                  "uuid": "3dbd8f35-f36c-4f8f-b050-0a5a5a2f6df1",
+                  "parentUUID": "7bcab9dd-5715-4c75-89e9-fe1c9a052c6d",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "3dbd8f35-f36c-4f8f-b050-0a5a5a2f6df1"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 109,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "edefed99-3b81-4eed-b914-26bbd3b78f85",
+          "title": "API - Painel",
+          "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\painel.test.js",
+          "file": "\\tests\\api\\painel.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"API - Painel\"",
+              "fullTitle": "API - Painel \"before each\" hook in \"API - Painel\"",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "restoreDatabase();",
+              "err": {},
+              "uuid": "efbd5afb-581e-402f-a02e-06fd3b1a0e2a",
+              "parentUUID": "edefed99-3b81-4eed-b914-26bbd3b78f85",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "deve retornar métricas zeradas quando não houver dados cadastrados",
+              "fullTitle": "API - Painel deve retornar métricas zeradas quando não houver dados cadastrados",
+              "timedOut": false,
+              "duration": 25,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await request(app).get('/api/painel');\nexpect(response.status).to.equal(200);\nexpect(response.body.totalInvestido).to.equal(0);\nexpect(response.body.totalRendimentos).to.equal(0);\nexpect(response.body.totalAportes).to.equal(0);\nexpect(response.body.totalAcumulado).to.equal(0);\nexpect(response.body.porcentagemRendimento).to.equal(0);",
+              "err": {},
+              "uuid": "f075a469-dba8-46f8-9f74-90c618f1eb81",
+              "parentUUID": "edefed99-3b81-4eed-b914-26bbd3b78f85",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve calcular corretamente o total investido, acumulado e porcentagem de rendimento",
+              "fullTitle": "API - Painel deve calcular corretamente o total investido, acumulado e porcentagem de rendimento",
+              "timedOut": false,
+              "duration": 54,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1. Cadastra ativo (MXRF11) -> 100 cotas a R$ 10,00 = R$ 1000,00 investido\nawait request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.00\n  });\n// 2. Registra rendimento de R$ 100,00\nawait request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 100.00\n  });\n// 3. Registra aporte de R$ 500,00\nawait request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'aporte',\n    valor: 500.00\n  });\n// 4. Consulta o Painel\nconst response = await request(app).get('/api/painel');\n// Total Investido = 100 * 10 = R$ 1000\n// Total Rendimentos = R$ 100\n// Total Aportes = R$ 500\n// Total Acumulado = 1000 + 100 = R$ 1100\n// Porcentagem de Rendimento = (100 / 1000) * 100 = 10%\nexpect(response.status).to.equal(200);\nexpect(response.body.totalInvestido).to.equal(1000);\nexpect(response.body.totalRendimentos).to.equal(100);\nexpect(response.body.totalAportes).to.equal(500);\nexpect(response.body.totalAcumulado).to.equal(1100);\nexpect(response.body.porcentagemRendimento).to.equal(10);",
+              "err": {},
+              "uuid": "93b5b6f3-bc59-47b2-b9c9-ce392fa0902e",
+              "parentUUID": "edefed99-3b81-4eed-b914-26bbd3b78f85",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f075a469-dba8-46f8-9f74-90c618f1eb81",
+            "93b5b6f3-bc59-47b2-b9c9-ce392fa0902e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 79,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "282fd482-d4af-44a4-9a2d-9ba16ca14766",
+          "title": "API - Rendimentos e Aportes",
+          "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\rendimentos.test.js",
+          "file": "\\tests\\api\\rendimentos.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"API - Rendimentos e Aportes\"",
+              "fullTitle": "API - Rendimentos e Aportes \"before each\" hook in \"API - Rendimentos e Aportes\"",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "restoreDatabase();",
+              "err": {},
+              "uuid": "b557b3a3-341b-401f-b7d9-e65eb5b9d7cd",
+              "parentUUID": "282fd482-d4af-44a4-9a2d-9ba16ca14766",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "8eea5413-c700-4741-b34c-59feb5c960cb",
+              "title": "POST /api/rendimentos",
+              "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\rendimentos.test.js",
+              "file": "\\tests\\api\\rendimentos.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve registrar um rendimento válido retornando status 201",
+                  "fullTitle": "API - Rendimentos e Aportes POST /api/rendimentos deve registrar um rendimento válido retornando status 201",
+                  "timedOut": false,
+                  "duration": 56,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 150.75\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body).to.have.property('id');\nexpect(response.body.tipo).to.equal('rendimento');\nexpect(response.body.valor).to.equal(150.75);",
+                  "err": {},
+                  "uuid": "e072dab2-ca66-4bfc-9fff-dcde96226e80",
+                  "parentUUID": "8eea5413-c700-4741-b34c-59feb5c960cb",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve registrar um aporte válido retornando status 201",
+                  "fullTitle": "API - Rendimentos e Aportes POST /api/rendimentos deve registrar um aporte válido retornando status 201",
+                  "timedOut": false,
+                  "duration": 10,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'aporte',\n    valor: 500.00\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body.tipo).to.equal('aporte');\nexpect(response.body.valor).to.equal(500.00);",
+                  "err": {},
+                  "uuid": "5614abd4-9c06-4504-a9ef-55831dc41758",
+                  "parentUUID": "8eea5413-c700-4741-b34c-59feb5c960cb",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve rejeitar registro com tipo inválido retornando status 400",
+                  "fullTitle": "API - Rendimentos e Aportes POST /api/rendimentos deve rejeitar registro com tipo inválido retornando status 400",
+                  "timedOut": false,
+                  "duration": 10,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'saque',\n    valor: 200.00\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('error');",
+                  "err": {},
+                  "uuid": "e801f76d-f9a4-4ba9-b037-0797c0c02b51",
+                  "parentUUID": "8eea5413-c700-4741-b34c-59feb5c960cb",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve rejeitar registro com formato de mês inválido retornando status 400",
+                  "fullTitle": "API - Rendimentos e Aportes POST /api/rendimentos deve rejeitar registro com formato de mês inválido retornando status 400",
+                  "timedOut": false,
+                  "duration": 11,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '08-2026', // Formato incorreto (esperado AAAA-MM)\n    tipo: 'aporte',\n    valor: 200.00\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body.error).to.contain('Mês inválido');",
+                  "err": {},
+                  "uuid": "5fd49cba-7028-487f-9221-9b3aa6dd49b0",
+                  "parentUUID": "8eea5413-c700-4741-b34c-59feb5c960cb",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "e072dab2-ca66-4bfc-9fff-dcde96226e80",
+                "5614abd4-9c06-4504-a9ef-55831dc41758",
+                "e801f76d-f9a4-4ba9-b037-0797c0c02b51",
+                "5fd49cba-7028-487f-9221-9b3aa6dd49b0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 87,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "ba192aa3-0f05-4c40-8831-b64f83d37314",
+              "title": "GET /api/rendimentos",
+              "fullFile": "C:\\Users\\EduardodosSantos\\projetos\\portfolio\\tests\\api\\rendimentos.test.js",
+              "file": "\\tests\\api\\rendimentos.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve listar todos os rendimentos e aportes cadastrados",
+                  "fullTitle": "API - Rendimentos e Aportes GET /api/rendimentos deve listar todos os rendimentos e aportes cadastrados",
+                  "timedOut": false,
+                  "duration": 97,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 150.00\n  });\nconst response = await request(app).get('/api/rendimentos');\nexpect(response.status).to.equal(200);\nexpect(response.body).to.be.an('array');\nexpect(response.body.length).to.equal(1);\nexpect(response.body[0].tipo).to.equal('rendimento');",
+                  "err": {},
+                  "uuid": "f42bee47-c1c6-4bcd-9b57-74bd903089ec",
+                  "parentUUID": "ba192aa3-0f05-4c40-8831-b64f83d37314",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f42bee47-c1c6-4bcd-9b57-74bd903089ec"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 97,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.8.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "api-tests",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochawesome-report/api",
+        "reportFilename": "api-tests",
+        "quiet": "true",
+        "overwrite": "true",
+        "html": "true",
+        "json": "true"
+      },
+      "version": "6.3.2"
+    }
+  }
+}
