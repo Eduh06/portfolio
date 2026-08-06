@@ -91,34 +91,53 @@ A documentação interativa completa dos endpoints e seus modelos de erro (statu
 
 ---
 
-## 🧪 Testes Automatizados
+## 🧪 Testes Automatizados e de Performance
 
-O projeto conta com testes unitários, testes de integração de API e testes de fumaça:
+A aplicação conta com uma estratégia de garantia de qualidade (QA) robusta, dividida em quatro camadas de testes para validar a API sob diferentes perspectivas:
 
-- Executar todos os testes:
+### 1. Testes Unitários
+- **O que são**: Testes que validam pequenas unidades isoladas de código, como funções e regras de validação sem envolver requisições de rede.
+- **Importância**: Garantem que as fórmulas matemáticas (como o recálculo do preço médio ponderado no `ativosService.js`) funcionem perfeitamente em todas as condições possíveis de entrada de dados.
+- **Como executar**:
   ```bash
-  npm test
+  npm run test:unit
   ```
-- Executar apenas testes de API e gerar o relatório do Mochawesome:
+
+### 2. Testes de Integração (API)
+- **O que são**: Testes de ponta a ponta que simulam requisições HTTP reais contra a nossa API (usando `Supertest` e `Mocha`), passando pelas rotas, controllers, services e persistência.
+- **Importância**: Garantem que o contrato dos endpoints esteja correto (validação de payloads, códigos de status HTTP como `200 OK`, `201 Created` e `400 Bad Request` e mensagens de erro de validação).
+- **Relatório Mochawesome**: A execução gera um relatório web interativo contendo os resultados e gráficos de execução.
+- **Como executar**:
   ```bash
   npm run test:api
   ```
-O relatório HTML do Mochawesome será salvo em `mochawesome-report/api/api-tests.html`.
+  *O relatório gerado é salvo localmente em `mochawesome-report/api/api-tests.html`.*
+
+### 3. Testes de Fumaça (Smoke Tests)
+- **O que são**: Testes simples e rápidos que validam se a infraestrutura básica e a acessibilidade da aplicação estão operacionais.
+- **Importância**: Funcionam como um termômetro rápido. Garantem que o servidor Express inicializa corretamente, redireciona rotas críticas e serve a documentação do Swagger UI (`/api-docs`).
+- **Como executar**:
+  ```bash
+  npm run test:smoke
+  ```
+
+### 4. Testes de Performance (Carga)
+- **O que são**: Simulações de tráfego de acesso concorrente à API utilizando a ferramenta de alta performance **k6** (Grafana).
+- **Importância**: Certificam que o servidor continua rápido (tempo de resposta médio abaixo de 200ms) e estável (menos de 1% de falhas) sob acessos simultâneos de usuários virtuais (VUs).
+- **Pré-requisitos**: Requer a instalação do k6 na máquina ([Instruções em k6.io](https://k6.io/)).
+- **Como executar**:
+  ```bash
+  npm run test:perf
+  ```
 
 ---
 
-## ⚡ Testes de Performance (Carga)
+## 🏃 Como rodar todos os testes funcionais de uma vez
+Para executar sequencialmente as suites de testes unitários, testes de API e testes de fumaça, basta rodar:
+```bash
+npm test
+```
 
-Adicionalmente, você pode executar testes de carga utilizando o **k6** para validar o desempenho da API sob acessos concorrentes:
+*Nota: Para assegurar que cada teste de API rode de forma isolada, a base de dados em memória é redefinida para seu estado inicial antes de cada cenário de teste através do helper `databaseSnapshot.js`.*
 
-1. Instale o k6 em sua máquina (Instruções em: [k6.io](https://k6.io/)).
-2. Inicie a API localmente:
-   ```bash
-   npm start
-   ```
-3. Rode o teste de carga:
-   ```bash
-   npm run test:perf
-   ```
-O teste simula o escalonamento de usuários virtuais (VUs) e valida os tempos de resposta e taxa de erros dos endpoints da aplicação.
 
