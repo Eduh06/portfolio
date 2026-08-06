@@ -30,6 +30,9 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# Mochawesome reports
+mochawesome-report/
+
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-temporary-files)
 .grunt
 

@@ -8,7 +8,8 @@
     "test": "npm run test:unit && npm run test:api && npm run test:smoke",
     "test:unit": "mocha \"tests/unit/**/*.test.js\" --exit",
     "test:api": "mocha \"tests/api/**/*.test.js\" --reporter mochawesome --reporter-options reportDir=mochawesome-report/api,reportFilename=api-tests,quiet=true,overwrite=true,html=true,json=true --exit",
-    "test:smoke": "mocha \"tests/smoke/**/*.test.js\" --exit"
+    "test:smoke": "mocha \"tests/smoke/**/*.test.js\" --exit",
+    "test:perf": "k6 run tests/performance/load.test.js"
   },
   "keywords": [],
   "author": "",

@@ -88,3 +88,37 @@ A documentação interativa completa dos endpoints e seus modelos de erro (statu
       "porcentagemRendimento": 14.29
     }
     ```
+
+---
+
+## 🧪 Testes Automatizados
+
+O projeto conta com testes unitários, testes de integração de API e testes de fumaça:
+
+- Executar todos os testes:
+  ```bash
+  npm test
+  ```
+- Executar apenas testes de API e gerar o relatório do Mochawesome:
+  ```bash
+  npm run test:api
+  ```
+O relatório HTML do Mochawesome será salvo em `mochawesome-report/api/api-tests.html`.
+
+---
+
+## ⚡ Testes de Performance (Carga)
+
+Adicionalmente, você pode executar testes de carga utilizando o **k6** para validar o desempenho da API sob acessos concorrentes:
+
+1. Instale o k6 em sua máquina (Instruções em: [k6.io](https://k6.io/)).
+2. Inicie a API localmente:
+   ```bash
+   npm start
+   ```
+3. Rode o teste de carga:
+   ```bash
+   npm run test:perf
+   ```
+O teste simula o escalonamento de usuários virtuais (VUs) e valida os tempos de resposta e taxa de erros dos endpoints da aplicação.
+
