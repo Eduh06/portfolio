@@ -1,0 +1,52 @@
+name: Bug Report
+description: Registrar um defeito (bug) encontrado no sistema
+title: "[BUG] "
+labels:
+  - bug
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Título resumido
+      description: Descreva o defeito em uma frase objetiva
+      placeholder: Ex. Cadastro de ativos aceita preço médio negativo
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidade
+      options:
+        - Crítica
+        - Alta
+        - Média
+        - Baixa
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir o bug
+      description: Descreva as etapas passo a passo para chegar ao erro
+      placeholder: |
+        1. Inicializar o servidor locally (npm start)
+        2. Fazer requisição POST em /api/ativos com preço médio igual a -10
+        3. Verificar o status code retornado
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria ter acontecido sob condições corretas?
+      placeholder: A API deveria retornar status 400 Bad Request impedindo o cadastro.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento atual
+      description: O que realmente está acontecendo no momento?
+      placeholder: A API retorna status 201 e cadastra o ativo com valor negativo no banco.
+    validations:
+      required: true

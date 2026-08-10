@@ -1,0 +1,36 @@
+name: User Story
+description: Descrever uma nova história de usuário (funcionalidade)
+title: "[US] "
+labels:
+  - user-story
+  - funcionalidade
+body:
+  - type: textarea
+    id: role
+    attributes:
+      label: Descrição da User Story
+      description: Use a estrutura clássica de história de usuário
+      placeholder: |
+        Como [tipo de usuário],
+        Eu quero [realizar uma ação],
+        Para que [eu consiga um valor/resultado].
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Critérios de Aceitação
+      description: Descreva as regras que validam a conclusão desta história
+      placeholder: |
+        - O campo X deve ser obrigatório.
+        - Se o valor for negativo, retornar status 400.
+    validations:
+      required: true
+  - type: textarea
+    id: test-scenarios
+    attributes:
+      label: Cenários de Teste a Automatizar
+      description: Liste os cenários de testes planejados para validar esta história
+      placeholder: |
+        - [Teste de API] Validar cadastro com sucesso (Status 201).
+        - [Teste de API] Validar erro de validação (Status 400).

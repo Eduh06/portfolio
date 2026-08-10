@@ -1,0 +1,48 @@
+name: Relatório de Execução de Testes
+description: Registrar a execução e resultados de um ciclo de testes (Test Run)
+title: "[TEST RUN] "
+labels:
+  - testes
+  - relatorio
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Versão / Branch Testada
+      description: Identifique a versão da API ou a branch sob teste.
+      placeholder: Ex. master ou v1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Ambiente de Teste
+      description: Em qual ambiente os testes foram executados?
+      options:
+        - Local (Desktop)
+        - CI (GitHub Actions)
+        - Staging
+        - Produção
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "### 📊 Resumo de Execução"
+  - type: input
+    id: summary-results
+    attributes:
+      label: Métricas de Resultados (Passou / Falhou)
+      placeholder: Ex. 11 aprovados, 0 falhas, 0 bloqueados
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Bugs / Defeitos Identificados
+      description: Liste os bugs encontrados neste ciclo de testes com título ou link da issue.
+      placeholder: Ex. BUG-01 - Cadastro de ativos aceita quantidade negativa
+  - type: textarea
+    id: notes
+    attributes:
+      label: Link / Evidências do Mochawesome
+      description: Insira observações adicionais ou anexe o arquivo zip do relatório mochawesome gerado.

@@ -1,0 +1,24 @@
+name: Task
+description: Registrar uma tarefa de engenharia ou manutenção geral
+title: "[TASK] "
+labels:
+  - task
+  - engenharia
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição da Tarefa
+      description: Descreva o trabalho técnico que precisa ser realizado
+      placeholder: Ex. Instalar k6 localmente e preparar os testes de performance.
+    validations:
+      required: true
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Lista de Atividades (Checklist)
+      description: Divida a tarefa em etapas menores
+      placeholder: |
+        - [ ] Configurar pacotes npm.
+        - [ ] Criar arquivo de script.
+        - [ ] Validar execução local.
