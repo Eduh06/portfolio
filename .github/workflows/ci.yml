@@ -55,6 +55,10 @@ jobs:
         cat k6-output.log
         echo "=== Arquivos na pasta de relatórios ==="
         ls -la mochawesome-report/api
+        
+        # Copia os logs de depuração para serem publicados no GitHub Pages
+        cp k6-output.log mochawesome-report/api/k6-output.log
+        ls -la mochawesome-report/api > mochawesome-report/api/files.log
 
     - name: Prepare Mochawesome Report for GitHub Pages
       if: always()
