@@ -34,6 +34,7 @@ jobs:
         # Baixa e instala o k6 diretamente na máquina da pipeline
         curl -L https://github.com/grafana/k6/releases/download/v0.50.0/k6-v0.50.0-linux-amd64.tar.gz | tar -xz
         sudo mv k6-v0.50.0-linux-amd64/k6 /usr/local/bin/k6
+        k6 --version # Verifica se o k6 foi instalado corretamente
 
     - name: Run server and execute all tests (k6 + Mocha)
       run: |
@@ -46,6 +47,12 @@ jobs:
         
         # Executa os testes funcionais do Mocha (Unitário, API e Fumaça)
         npm test
+
+    - name: Debug - List Report Files
+      if: always()
+      run: |
+        echo "=== Arquivos na pasta de relatórios ==="
+        ls -la mochawesome-report/api
 
     - name: Prepare Mochawesome Report for GitHub Pages
       if: always()
