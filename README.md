@@ -147,7 +147,7 @@ A aplicação conta com uma estratégia de garantia de qualidade (QA) robusta, d
   ```bash
   npm run test:api
   ```
-  *O relatório gerado é salvo localmente em `mochawesome-report/api/api-tests.html`.*
+  *O relatório gerado é salvo localmente em `mochawesome-report/api/api-tests.html` e publicado automaticamente na nuvem em: [https://Eduh06.github.io/portfolio/](https://Eduh06.github.io/portfolio/)*
 
 ### 3. Testes de Fumaça (Smoke Tests)
 - **O que são**: Testes simples e rápidos que validam se a infraestrutura básica e a acessibilidade da aplicação estão operacionais.
@@ -165,6 +165,7 @@ A aplicação conta com uma estratégia de garantia de qualidade (QA) robusta, d
   ```bash
   npm run test:perf
   ```
+  *O relatório de performance em HTML é gerado em `mochawesome-report/api/performance.html` e publicado automaticamente na nuvem em: [https://Eduh06.github.io/portfolio/performance.html](https://Eduh06.github.io/portfolio/performance.html)*
 
 ---
 

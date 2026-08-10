@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "master", "main" ]
 
-# Permissões necessárias para que a pipeline publique na branch gh-pages
 permissions:
   contents: write
 
@@ -27,16 +26,29 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run automated tests
+    - name: Create report directory
+      run: mkdir -p mochawesome-report/api
+
+    - name: Start Express Server in background
+      run: |
+        node src/app.js &
+        sleep 3 # Aguarda o servidor inicializar na porta 3000
+
+    - name: Run k6 performance test
+      uses: grafana/k6-action@v0.3.1
+      with:
+        filename: tests/performance/load.test.js
+
+    - name: Run all functional tests (Unit + API + Smoke)
       run: npm test
 
     - name: Prepare Mochawesome Report for GitHub Pages
       if: always()
       run: |
-        # Renomeia o HTML para index.html para o GitHub Pages abrir diretamente o relatório
+        # Renomeia o relatório funcional para index.html para ser a página principal
         mv mochawesome-report/api/api-tests.html mochawesome-report/api/index.html
 
-    - name: Deploy Test Report to GitHub Pages
+    - name: Deploy Test Reports to GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
