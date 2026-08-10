@@ -1,3 +1,4 @@
+// Testes de fumaça para validar a disponibilidade básica do servidor e Swagger
 const request = require('supertest');
 const { expect } = require('chai');
 const app = require('../../src/app');
