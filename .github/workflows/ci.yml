@@ -42,15 +42,17 @@ jobs:
         node src/app.js &
         sleep 3 # Aguarda o servidor inicializar na porta 3000
         
-        # Executa os testes de performance com o k6 (tolera lentidões de rede na nuvem)
-        k6 run tests/performance/load.test.js || true
+        # Executa os testes de performance com o k6 e salva a saída para depuração
+        k6 run tests/performance/load.test.js > k6-output.log 2>&1 || true
         
         # Executa os testes funcionais do Mocha (Unitário, API e Fumaça)
         npm test
 
-    - name: Debug - List Report Files
+    - name: Debug - List Report Files and k6 Output
       if: always()
       run: |
+        echo "=== Saída do Teste k6 ==="
+        cat k6-output.log
         echo "=== Arquivos na pasta de relatórios ==="
         ls -la mochawesome-report/api
 
