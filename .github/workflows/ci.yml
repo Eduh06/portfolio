@@ -29,18 +29,23 @@ jobs:
     - name: Create report directory
       run: mkdir -p mochawesome-report/api
 
-    - name: Start Express Server in background
+    - name: Install k6
       run: |
+        # Baixa e instala o k6 diretamente na máquina da pipeline
+        curl -L https://github.com/grafana/k6/releases/download/v0.50.0/k6-v0.50.0-linux-amd64.tar.gz | tar -xz
+        sudo mv k6-v0.50.0-linux-amd64/k6 /usr/local/bin/k6
+
+    - name: Run server and execute all tests (k6 + Mocha)
+      run: |
+        # Inicia o servidor Express em background
         node src/app.js &
         sleep 3 # Aguarda o servidor inicializar na porta 3000
-
-    - name: Run k6 performance test
-      uses: grafana/k6-action@v0.3.1
-      with:
-        filename: tests/performance/load.test.js
-
-    - name: Run all functional tests (Unit + API + Smoke)
-      run: npm test
+        
+        # Executa os testes de performance com o k6
+        k6 run tests/performance/load.test.js
+        
+        # Executa os testes funcionais do Mocha (Unitário, API e Fumaça)
+        npm test
 
     - name: Prepare Mochawesome Report for GitHub Pages
       if: always()
