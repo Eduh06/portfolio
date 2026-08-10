@@ -5,9 +5,9 @@
     "passes": 17,
     "pending": 0,
     "failures": 0,
-    "start": "2026-08-10T02:14:58.338Z",
-    "end": "2026-08-10T02:14:58.412Z",
-    "duration": 74,
+    "start": "2026-08-10T02:19:13.206Z",
+    "end": "2026-08-10T02:19:13.275Z",
+    "duration": 69,
     "testsRegistered": 17,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "92e4b7e9-381f-4044-8441-3e6f1da4d7db",
+      "uuid": "b21f0c69-8af6-478a-9e44-5a4e36db009a",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+          "uuid": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
           "title": "Unit - Ativos Service",
           "fullFile": "/home/runner/work/portfolio/portfolio/tests/unit/ativos.test.js",
           "file": "/tests/unit/ativos.test.js",
@@ -45,8 +45,8 @@
               "context": null,
               "code": "restoreDatabase();",
               "err": {},
-              "uuid": "afe065b5-7bf0-4700-9112-1a6cacc07a30",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "60cb9cab-c2f2-42e6-b2d3-93ba18816a96",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": true,
               "skipped": false
             }
@@ -57,7 +57,7 @@
               "title": "deve cadastrar um ativo válido com sucesso",
               "fullTitle": "Unit - Ativos Service deve cadastrar um ativo válido com sucesso",
               "timedOut": false,
-              "duration": 2,
+              "duration": 1,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -66,8 +66,8 @@
               "context": null,
               "code": "const data = {\n  codigo: 'MXRF11',\n  nome: 'Maxi Renda FII',\n  quantidade: 100,\n  precoMedio: 10.50\n};\nconst result = ativosService.cadastrarAtivo(data);\nexpect(result).to.have.property('id');\nexpect(result.codigo).to.equal('MXRF11');\nexpect(result.nome).to.equal('Maxi Renda FII');\nexpect(result.quantidade).to.equal(100);\nexpect(result.precoMedio).to.equal(10.50);",
               "err": {},
-              "uuid": "7031b67b-9cea-4cd0-a40f-28a535de1b78",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "e064f419-d223-4b80-946e-e1433a100b7c",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": false,
               "skipped": false
             },
@@ -75,7 +75,7 @@
               "title": "deve rejeitar cadastro sem código do ativo",
               "fullTitle": "Unit - Ativos Service deve rejeitar cadastro sem código do ativo",
               "timedOut": false,
-              "duration": 0,
+              "duration": 1,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -84,8 +84,8 @@
               "context": null,
               "code": "const data = {\n  nome: 'Maxi Renda FII',\n  quantidade: 100,\n  precoMedio: 10.50\n};\nexpect(() => ativosService.cadastrarAtivo(data)).to.throw(\n  'Código do ativo é obrigatório e deve ser uma string válida.'\n);",
               "err": {},
-              "uuid": "8fa03ce0-3ec6-4465-b84b-7928b62c96d9",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "a1283ca5-f1c0-408c-84e8-55236786c832",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": false,
               "skipped": false
             },
@@ -102,8 +102,8 @@
               "context": null,
               "code": "const data = {\n  codigo: 'MXRF11',\n  nome: 'Maxi Renda FII',\n  quantidade: 0,\n  precoMedio: 10.50\n};\nexpect(() => ativosService.cadastrarAtivo(data)).to.throw(\n  'Quantidade deve ser um número maior que zero.'\n);",
               "err": {},
-              "uuid": "ecdb519f-d633-453d-a520-5d6352b7c827",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "4fe03d7e-fa26-4b64-95f3-cc28aa96fcb8",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": false,
               "skipped": false
             },
@@ -120,8 +120,8 @@
               "context": null,
               "code": "const data = {\n  codigo: 'MXRF11',\n  nome: 'Maxi Renda FII',\n  quantidade: 100,\n  precoMedio: -5\n};\nexpect(() => ativosService.cadastrarAtivo(data)).to.throw(\n  'Preço médio deve ser um número maior que zero.'\n);",
               "err": {},
-              "uuid": "e05cc357-9186-4c1e-9cf0-50b3ca60c04b",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "538aa8bd-d1e2-4cfc-acb5-1efe5017b94a",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": false,
               "skipped": false
             },
@@ -138,19 +138,19 @@
               "context": null,
               "code": "const data1 = {\n  codigo: 'MXRF11',\n  nome: 'Maxi Renda FII',\n  quantidade: 100,\n  precoMedio: 10.00\n};\nconst data2 = {\n  codigo: 'mxrf11', // Testando case insensitivity\n  nome: 'Maxi Renda FII Atualizado',\n  quantidade: 50,\n  precoMedio: 11.20\n};\nativosService.cadastrarAtivo(data1);\nconst result = ativosService.cadastrarAtivo(data2);\n// Novo total: Qtd = 100 + 50 = 150\n// Preço Médio = ((100 * 10) + (50 * 11.2)) / 150 = (1000 + 560) / 150 = 1560 / 150 = 10.4\nexpect(result.quantidade).to.equal(150);\nexpect(result.precoMedio).to.equal(10.4);\nexpect(result.codigo).to.equal('MXRF11');",
               "err": {},
-              "uuid": "ee57d450-58a5-4cc2-8a30-769e7f5c96a2",
-              "parentUUID": "6dcc7986-09d2-4c22-a4c6-c2ad7b2d9d95",
+              "uuid": "e0c9ea57-d029-4068-bad6-73571c847f38",
+              "parentUUID": "e11ed9ed-6700-4ea7-a854-84e3cf04e48a",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "7031b67b-9cea-4cd0-a40f-28a535de1b78",
-            "8fa03ce0-3ec6-4465-b84b-7928b62c96d9",
-            "ecdb519f-d633-453d-a520-5d6352b7c827",
-            "e05cc357-9186-4c1e-9cf0-50b3ca60c04b",
-            "ee57d450-58a5-4cc2-8a30-769e7f5c96a2"
+            "e064f419-d223-4b80-946e-e1433a100b7c",
+            "a1283ca5-f1c0-408c-84e8-55236786c832",
+            "4fe03d7e-fa26-4b64-95f3-cc28aa96fcb8",
+            "538aa8bd-d1e2-4cfc-acb5-1efe5017b94a",
+            "e0c9ea57-d029-4068-bad6-73571c847f38"
           ],
           "failures": [],
           "pending": [],
@@ -161,7 +161,7 @@
           "_timeout": 2000
         },
         {
-          "uuid": "8d6e2959-4fe4-4a56-bdf1-87a2e96327e3",
+          "uuid": "7430a4f6-8a09-4742-803c-b6658800da88",
           "title": "API - Ativos",
           "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/ativos.test.js",
           "file": "/tests/api/ativos.test.js",
@@ -179,8 +179,8 @@
               "context": null,
               "code": "restoreDatabase();",
               "err": {},
-              "uuid": "b452f403-d0e6-402e-89b9-2ed2db1a7838",
-              "parentUUID": "8d6e2959-4fe4-4a56-bdf1-87a2e96327e3",
+              "uuid": "4e352e92-9412-4253-b480-6e0ffa8a6c47",
+              "parentUUID": "7430a4f6-8a09-4742-803c-b6658800da88",
               "isHook": true,
               "skipped": false
             }
@@ -189,7 +189,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "7a4d34b1-edb2-4d8a-9b1a-fe8f6898300b",
+              "uuid": "9b77e1e0-8b88-40f2-b791-9c26332b633a",
               "title": "POST /api/ativos",
               "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/ativos.test.js",
               "file": "/tests/api/ativos.test.js",
@@ -200,7 +200,7 @@
                   "title": "deve cadastrar um ativo válido retornando status 201",
                   "fullTitle": "API - Ativos POST /api/ativos deve cadastrar um ativo válido retornando status 201",
                   "timedOut": false,
-                  "duration": 19,
+                  "duration": 18,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -209,8 +209,8 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.50\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body).to.have.property('id');\nexpect(response.body.codigo).to.equal('MXRF11');\nexpect(response.body.quantidade).to.equal(100);",
                   "err": {},
-                  "uuid": "f7e07836-0a85-4101-879f-9a9f2d063160",
-                  "parentUUID": "7a4d34b1-edb2-4d8a-9b1a-fe8f6898300b",
+                  "uuid": "33768178-756f-4567-a36f-1b0fe8c6b270",
+                  "parentUUID": "9b77e1e0-8b88-40f2-b791-9c26332b633a",
                   "isHook": false,
                   "skipped": false
                 },
@@ -227,27 +227,27 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: '',\n    nome: 'Maxi Renda FII',\n    quantidade: -10,\n    precoMedio: 10.50\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('error');",
                   "err": {},
-                  "uuid": "3078022c-07ba-4c66-91d0-156dc4bbce4e",
-                  "parentUUID": "7a4d34b1-edb2-4d8a-9b1a-fe8f6898300b",
+                  "uuid": "a93c55b3-0e92-47a8-aabd-fc362cd6413e",
+                  "parentUUID": "9b77e1e0-8b88-40f2-b791-9c26332b633a",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "f7e07836-0a85-4101-879f-9a9f2d063160",
-                "3078022c-07ba-4c66-91d0-156dc4bbce4e"
+                "33768178-756f-4567-a36f-1b0fe8c6b270",
+                "a93c55b3-0e92-47a8-aabd-fc362cd6413e"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 22,
+              "duration": 21,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "2d837f9a-352d-49be-89a7-3d71f8079aa8",
+              "uuid": "d796a001-0a00-4376-b1b4-9c3626eabb1b",
               "title": "GET /api/ativos",
               "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/ativos.test.js",
               "file": "/tests/api/ativos.test.js",
@@ -267,15 +267,15 @@
                   "context": null,
                   "code": "// Cadastra primeiro\nawait request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.50\n  });\nconst response = await request(app).get('/api/ativos');\nexpect(response.status).to.equal(200);\nexpect(response.body).to.be.an('array');\nexpect(response.body.length).to.equal(1);\nexpect(response.body[0].codigo).to.equal('MXRF11');",
                   "err": {},
-                  "uuid": "b0f438b1-68d2-418e-84d7-a1a773f503a1",
-                  "parentUUID": "2d837f9a-352d-49be-89a7-3d71f8079aa8",
+                  "uuid": "76e0918c-901a-4378-b80f-c1c49f476a8d",
+                  "parentUUID": "d796a001-0a00-4376-b1b4-9c3626eabb1b",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "b0f438b1-68d2-418e-84d7-a1a773f503a1"
+                "76e0918c-901a-4378-b80f-c1c49f476a8d"
               ],
               "failures": [],
               "pending": [],
@@ -296,7 +296,7 @@
           "_timeout": 2000
         },
         {
-          "uuid": "57038cee-24ba-4d5b-aac0-cbfbdf50cf8b",
+          "uuid": "b700519f-7d0e-410a-9b43-7c3ebc51ea8a",
           "title": "API - Painel",
           "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/painel.test.js",
           "file": "/tests/api/painel.test.js",
@@ -314,8 +314,8 @@
               "context": null,
               "code": "restoreDatabase();",
               "err": {},
-              "uuid": "28ef4a28-f43a-4315-9696-626a0cbbe596",
-              "parentUUID": "57038cee-24ba-4d5b-aac0-cbfbdf50cf8b",
+              "uuid": "04b81e03-1f4c-45ac-bc6c-e480d2b61ad2",
+              "parentUUID": "b700519f-7d0e-410a-9b43-7c3ebc51ea8a",
               "isHook": true,
               "skipped": false
             }
@@ -326,7 +326,7 @@
               "title": "deve retornar métricas zeradas quando não houver dados cadastrados",
               "fullTitle": "API - Painel deve retornar métricas zeradas quando não houver dados cadastrados",
               "timedOut": false,
-              "duration": 4,
+              "duration": 3,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -335,8 +335,8 @@
               "context": null,
               "code": "const response = await request(app).get('/api/painel');\nexpect(response.status).to.equal(200);\nexpect(response.body.totalInvestido).to.equal(0);\nexpect(response.body.totalRendimentos).to.equal(0);\nexpect(response.body.totalAportes).to.equal(0);\nexpect(response.body.totalAcumulado).to.equal(0);\nexpect(response.body.porcentagemRendimento).to.equal(0);",
               "err": {},
-              "uuid": "78747af2-12dc-4bd6-891a-8ca19f1705de",
-              "parentUUID": "57038cee-24ba-4d5b-aac0-cbfbdf50cf8b",
+              "uuid": "40b23313-8958-4824-9260-05dadc402c36",
+              "parentUUID": "b700519f-7d0e-410a-9b43-7c3ebc51ea8a",
               "isHook": false,
               "skipped": false
             },
@@ -344,7 +344,7 @@
               "title": "deve calcular corretamente o total investido, acumulado e porcentagem de rendimento",
               "fullTitle": "API - Painel deve calcular corretamente o total investido, acumulado e porcentagem de rendimento",
               "timedOut": false,
-              "duration": 10,
+              "duration": 8,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -353,27 +353,27 @@
               "context": null,
               "code": "// 1. Cadastra ativo (MXRF11) -> 100 cotas a R$ 10,00 = R$ 1000,00 investido\nawait request(app)\n  .post('/api/ativos')\n  .send({\n    codigo: 'MXRF11',\n    nome: 'Maxi Renda FII',\n    quantidade: 100,\n    precoMedio: 10.00\n  });\n// 2. Registra rendimento de R$ 100,00\nawait request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 100.00\n  });\n// 3. Registra aporte de R$ 500,00\nawait request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'aporte',\n    valor: 500.00\n  });\n// 4. Consulta o Painel\nconst response = await request(app).get('/api/painel');\n// Total Investido = 100 * 10 = R$ 1000\n// Total Rendimentos = R$ 100\n// Total Aportes = R$ 500\n// Total Acumulado = 1000 + 100 = R$ 1100\n// Porcentagem de Rendimento = (100 / 1000) * 100 = 10%\nexpect(response.status).to.equal(200);\nexpect(response.body.totalInvestido).to.equal(1000);\nexpect(response.body.totalRendimentos).to.equal(100);\nexpect(response.body.totalAportes).to.equal(500);\nexpect(response.body.totalAcumulado).to.equal(1100);\nexpect(response.body.porcentagemRendimento).to.equal(10);",
               "err": {},
-              "uuid": "4e37c518-475e-47e7-82b7-5b219200bb16",
-              "parentUUID": "57038cee-24ba-4d5b-aac0-cbfbdf50cf8b",
+              "uuid": "758927af-6ca0-461f-a17a-38a09ab265d6",
+              "parentUUID": "b700519f-7d0e-410a-9b43-7c3ebc51ea8a",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "78747af2-12dc-4bd6-891a-8ca19f1705de",
-            "4e37c518-475e-47e7-82b7-5b219200bb16"
+            "40b23313-8958-4824-9260-05dadc402c36",
+            "758927af-6ca0-461f-a17a-38a09ab265d6"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 14,
+          "duration": 11,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "c1e504d4-6277-49c7-9869-f4193ea405a0",
+          "uuid": "6e366eb6-325f-49a6-8bf2-d6c94306ffbe",
           "title": "API - Rendimentos e Aportes",
           "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/rendimentos.test.js",
           "file": "/tests/api/rendimentos.test.js",
@@ -391,8 +391,8 @@
               "context": null,
               "code": "restoreDatabase();",
               "err": {},
-              "uuid": "f61318d9-40d1-4b34-915a-6a0c78afc472",
-              "parentUUID": "c1e504d4-6277-49c7-9869-f4193ea405a0",
+              "uuid": "b5b2a9f1-7353-471a-9ab1-e6d1aafccf4a",
+              "parentUUID": "6e366eb6-325f-49a6-8bf2-d6c94306ffbe",
               "isHook": true,
               "skipped": false
             }
@@ -401,7 +401,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "3295cab2-48da-47db-bd86-1b2a10405ed3",
+              "uuid": "4dbe49bf-135a-4601-93f7-f06b5e462c47",
               "title": "POST /api/rendimentos",
               "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/rendimentos.test.js",
               "file": "/tests/api/rendimentos.test.js",
@@ -421,8 +421,8 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 150.75\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body).to.have.property('id');\nexpect(response.body.tipo).to.equal('rendimento');\nexpect(response.body.valor).to.equal(150.75);",
                   "err": {},
-                  "uuid": "78710120-eb8c-4157-be5c-244dfcfa96a8",
-                  "parentUUID": "3295cab2-48da-47db-bd86-1b2a10405ed3",
+                  "uuid": "aa54b176-f02e-4ae3-8dd7-987d17213c35",
+                  "parentUUID": "4dbe49bf-135a-4601-93f7-f06b5e462c47",
                   "isHook": false,
                   "skipped": false
                 },
@@ -439,8 +439,8 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'aporte',\n    valor: 500.00\n  });\nexpect(response.status).to.equal(201);\nexpect(response.body.tipo).to.equal('aporte');\nexpect(response.body.valor).to.equal(500.00);",
                   "err": {},
-                  "uuid": "7411109a-b5b7-4b36-864c-fe9bb5faa8a8",
-                  "parentUUID": "3295cab2-48da-47db-bd86-1b2a10405ed3",
+                  "uuid": "bc63db72-66e4-40f7-908d-e283bca41afb",
+                  "parentUUID": "4dbe49bf-135a-4601-93f7-f06b5e462c47",
                   "isHook": false,
                   "skipped": false
                 },
@@ -457,8 +457,8 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'saque',\n    valor: 200.00\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('error');",
                   "err": {},
-                  "uuid": "bd9b7d1f-c253-446d-9498-399cd10b2a28",
-                  "parentUUID": "3295cab2-48da-47db-bd86-1b2a10405ed3",
+                  "uuid": "b67dc353-da11-4c0e-84c7-7111a05a9538",
+                  "parentUUID": "4dbe49bf-135a-4601-93f7-f06b5e462c47",
                   "isHook": false,
                   "skipped": false
                 },
@@ -475,18 +475,18 @@
                   "context": null,
                   "code": "const response = await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '08-2026', // Formato incorreto (esperado AAAA-MM)\n    tipo: 'aporte',\n    valor: 200.00\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body.error).to.contain('Mês inválido');",
                   "err": {},
-                  "uuid": "e10e2c8e-6a99-42cf-b19d-b10c2851051a",
-                  "parentUUID": "3295cab2-48da-47db-bd86-1b2a10405ed3",
+                  "uuid": "528951c8-a1be-45f1-a7b6-2e59f1b00bdc",
+                  "parentUUID": "4dbe49bf-135a-4601-93f7-f06b5e462c47",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "78710120-eb8c-4157-be5c-244dfcfa96a8",
-                "7411109a-b5b7-4b36-864c-fe9bb5faa8a8",
-                "bd9b7d1f-c253-446d-9498-399cd10b2a28",
-                "e10e2c8e-6a99-42cf-b19d-b10c2851051a"
+                "aa54b176-f02e-4ae3-8dd7-987d17213c35",
+                "bc63db72-66e4-40f7-908d-e283bca41afb",
+                "b67dc353-da11-4c0e-84c7-7111a05a9538",
+                "528951c8-a1be-45f1-a7b6-2e59f1b00bdc"
               ],
               "failures": [],
               "pending": [],
@@ -497,7 +497,7 @@
               "_timeout": 2000
             },
             {
-              "uuid": "b2e7fd3d-ae8a-4d32-9466-e361b4908f41",
+              "uuid": "23393777-f8b5-4f34-a223-bc1a0ac0fdee",
               "title": "GET /api/rendimentos",
               "fullFile": "/home/runner/work/portfolio/portfolio/tests/api/rendimentos.test.js",
               "file": "/tests/api/rendimentos.test.js",
@@ -508,7 +508,7 @@
                   "title": "deve listar todos os rendimentos e aportes cadastrados",
                   "fullTitle": "API - Rendimentos e Aportes GET /api/rendimentos deve listar todos os rendimentos e aportes cadastrados",
                   "timedOut": false,
-                  "duration": 3,
+                  "duration": 4,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -517,20 +517,20 @@
                   "context": null,
                   "code": "await request(app)\n  .post('/api/rendimentos')\n  .send({\n    mes: '2026-08',\n    tipo: 'rendimento',\n    valor: 150.00\n  });\nconst response = await request(app).get('/api/rendimentos');\nexpect(response.status).to.equal(200);\nexpect(response.body).to.be.an('array');\nexpect(response.body.length).to.equal(1);\nexpect(response.body[0].tipo).to.equal('rendimento');",
                   "err": {},
-                  "uuid": "738a8a19-6a25-4339-aaa6-908a405acf40",
-                  "parentUUID": "b2e7fd3d-ae8a-4d32-9466-e361b4908f41",
+                  "uuid": "b31ad41d-dbf0-4273-9fff-00440ad566b4",
+                  "parentUUID": "23393777-f8b5-4f34-a223-bc1a0ac0fdee",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "738a8a19-6a25-4339-aaa6-908a405acf40"
+                "b31ad41d-dbf0-4273-9fff-00440ad566b4"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 4,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
@@ -546,7 +546,7 @@
           "_timeout": 2000
         },
         {
-          "uuid": "30dc52e2-8a77-4356-b2b3-4048d8ed0c96",
+          "uuid": "43e5d9fb-e409-4615-8d2b-8be77c2a1a17",
           "title": "Smoke - Aplicação",
           "fullFile": "/home/runner/work/portfolio/portfolio/tests/smoke/smoke.test.js",
           "file": "/tests/smoke/smoke.test.js",
@@ -566,8 +566,8 @@
               "context": null,
               "code": "const response = await request(app).get('/');\nexpect(response.status).to.equal(302);\nexpect(response.headers.location).to.equal('/api-docs');",
               "err": {},
-              "uuid": "66ee89b5-8321-44d7-958f-4daf0704e87f",
-              "parentUUID": "30dc52e2-8a77-4356-b2b3-4048d8ed0c96",
+              "uuid": "fce21070-0ebe-4bf9-bc04-9deb21fc1bad",
+              "parentUUID": "43e5d9fb-e409-4615-8d2b-8be77c2a1a17",
               "isHook": false,
               "skipped": false
             },
@@ -584,16 +584,16 @@
               "context": null,
               "code": "const response = await request(app).get('/api-docs/');\nexpect(response.status).to.equal(200);\nexpect(response.text).to.contain('<html');",
               "err": {},
-              "uuid": "b84e1cdb-c099-4b55-9fb8-9007062ce5b5",
-              "parentUUID": "30dc52e2-8a77-4356-b2b3-4048d8ed0c96",
+              "uuid": "f5a4716d-3528-43a3-a73c-dcc5d40efb6c",
+              "parentUUID": "43e5d9fb-e409-4615-8d2b-8be77c2a1a17",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "66ee89b5-8321-44d7-958f-4daf0704e87f",
-            "b84e1cdb-c099-4b55-9fb8-9007062ce5b5"
+            "fce21070-0ebe-4bf9-bc04-9deb21fc1bad",
+            "f5a4716d-3528-43a3-a73c-dcc5d40efb6c"
           ],
           "failures": [],
           "pending": [],
