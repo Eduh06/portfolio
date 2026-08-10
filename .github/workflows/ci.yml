@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master", "main" ]
 
+# Permissões necessárias para que a pipeline publique na branch gh-pages
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,9 +30,15 @@ jobs:
     - name: Run automated tests
       run: npm test
 
-    - name: Upload Mochawesome Report Artifact
-      if: always() # Garante que o relatório seja salvo mesmo se algum teste falhar
-      uses: actions/upload-artifact@v4
+    - name: Prepare Mochawesome Report for GitHub Pages
+      if: always()
+      run: |
+        # Renomeia o HTML para index.html para o GitHub Pages abrir diretamente o relatório
+        mv mochawesome-report/api/api-tests.html mochawesome-report/api/index.html
+
+    - name: Deploy Test Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        name: api-mochawesome-report
-        path: mochawesome-report/
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./mochawesome-report/api
