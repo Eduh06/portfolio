@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
-// Importação da biblioteca de relatórios gráficos do k6
-import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
+// Importação da biblioteca de relatórios gráficos do k6 compatível com o parser
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.cjs';
 
 // Configuração dos estágios de carga
 export const options = {
