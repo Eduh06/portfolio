@@ -41,3 +41,10 @@ Cada usuário virtual simula um fluxo de uso real em loop:
    ```bash
    npm run test:perf
    ```
+
+---
+
+## 📊 Relatório Online
+
+O relatório gráfico com os resultados detalhados da última execução de performance realizada pela pipeline do GitHub Actions pode ser acessado publicamente em:
+👉 [https://Eduh06.github.io/portfolio/performance.html](https://Eduh06.github.io/portfolio/performance.html)
