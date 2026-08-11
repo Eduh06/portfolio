@@ -4,7 +4,7 @@ Esta é uma API REST desenvolvida em Node.js com Express para atuar como um Rast
 
 ---
 
-## 🏗️ Arquitetura do Projeto
+##  Arquitetura do Projeto
 
 O projeto segue uma arquitetura em camadas estruturada para promover separação de conceitos, facilidade de manutenção e testabilidade:
 
@@ -14,7 +14,7 @@ O projeto segue uma arquitetura em camadas estruturada para promover separação
 - **`src/routes/`**: Camada de roteamento. Define os endpoints do servidor e direciona as requisições para seus respectivos controllers.
 - **`src/resources/`**: Contém arquivos de configuração estática e recursos do projeto (como a especificação do Swagger JSON).
 
-### 🗺️ Mapa Mental da Estrutura
+###  Mapa Mental da Estrutura
 
 Abaixo está o mapa mental que ilustra como o projeto está estruturado entre componentes da aplicação, qualidade e documentação:
 
@@ -52,7 +52,7 @@ mindmap
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Runtime**: Node.js
 - **Framework Web**: Express.js
@@ -61,7 +61,7 @@ mindmap
 
 ---
 
-## 🚀 Como Executar o Projeto
+##  Como Executar o Projeto
 
 1. Certifique-se de ter o **Node.js** instalado em sua máquina.
 2. No diretório raiz do projeto, instale as dependências:
@@ -78,7 +78,7 @@ mindmap
 
 ---
 
-## 📍 Endpoints da API
+##  Endpoints da API
 
 A documentação interativa completa dos endpoints e seus modelos de erro (status code 400, 500) e sucesso está descrita no Swagger. Abaixo, um resumo rápido dos endpoints disponíveis:
 
@@ -127,7 +127,7 @@ A documentação interativa completa dos endpoints e seus modelos de erro (statu
 
 ---
 
-## 🧪 Testes Automatizados e de Performance
+##  Testes Automatizados e de Performance
 
 A aplicação conta com uma estratégia de garantia de qualidade (QA) robusta, dividida em quatro camadas de testes para validar a API sob diferentes perspectivas:
 
@@ -169,7 +169,7 @@ A aplicação conta com uma estratégia de garantia de qualidade (QA) robusta, d
 
 ---
 
-## 🏃 Como rodar todos os testes funcionais de uma vez
+##  Como rodar todos os testes funcionais de uma vez
 Para executar sequencialmente as suites de testes unitários, testes de API e testes de fumaça, basta rodar:
 ```bash
 npm test
