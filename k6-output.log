@@ -132,7 +132,7 @@ default   [  97% ] 04/15 VUs  39.0s/40.0s
 
 running (0m40.0s), 02/15 VUs, 202 complete and 0 interrupted iterations
 default   [ 100% ] 02/15 VUs  40.0s/40.0s
-time="2026-08-10T02:28:09Z" level=info msg="[k6-reporter v3.0.4] Generating HTML summary report, with theme: default" source=console
+time="2026-08-11T23:24:36Z" level=info msg="[k6-reporter v3.0.4] Generating HTML summary report, with theme: default" source=console
 
 running (0m40.6s), 00/15 VUs, 204 complete and 0 interrupted iterations
 default ✓ [ 100% ] 00/15 VUs  40s
