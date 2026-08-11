@@ -4,14 +4,28 @@ const app = require('../../src/app');
 const { restoreDatabase } = require('../helpers/databaseSnapshot');
 
 describe('API - Rendimentos e Aportes', () => {
-  beforeEach(() => {
+  let token;
+
+  beforeEach(async () => {
     restoreDatabase();
+
+    // Cadastra e autentica o usuário de teste
+    await request(app)
+      .post('/api/auth/register')
+      .send({ email: 'test@example.com', password: 'password123' });
+
+    const loginRes = await request(app)
+      .post('/api/auth/login')
+      .send({ email: 'test@example.com', password: 'password123' });
+
+    token = loginRes.body.token;
   });
 
   describe('POST /api/rendimentos', () => {
     it('deve registrar um rendimento válido retornando status 201', async () => {
       const response = await request(app)
         .post('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           mes: '2026-08',
           tipo: 'rendimento',
@@ -27,6 +41,7 @@ describe('API - Rendimentos e Aportes', () => {
     it('deve registrar um aporte válido retornando status 201', async () => {
       const response = await request(app)
         .post('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           mes: '2026-08',
           tipo: 'aporte',
@@ -41,6 +56,7 @@ describe('API - Rendimentos e Aportes', () => {
     it('deve rejeitar registro com tipo inválido retornando status 400', async () => {
       const response = await request(app)
         .post('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           mes: '2026-08',
           tipo: 'saque',
@@ -54,6 +70,7 @@ describe('API - Rendimentos e Aportes', () => {
     it('deve rejeitar registro com formato de mês inválido retornando status 400', async () => {
       const response = await request(app)
         .post('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           mes: '08-2026', // Formato incorreto (esperado AAAA-MM)
           tipo: 'aporte',
@@ -69,13 +86,16 @@ describe('API - Rendimentos e Aportes', () => {
     it('deve listar todos os rendimentos e aportes cadastrados', async () => {
       await request(app)
         .post('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           mes: '2026-08',
           tipo: 'rendimento',
           valor: 150.00
         });
 
-      const response = await request(app).get('/api/rendimentos');
+      const response = await request(app)
+        .get('/api/rendimentos')
+        .set('Authorization', `Bearer ${token}`);
 
       expect(response.status).to.equal(200);
       expect(response.body).to.be.an('array');

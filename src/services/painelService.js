@@ -1,9 +1,9 @@
 const db = require('../models/db');
 
 class PainelService {
-  obterDadosPainel() {
-    const ativos = db.getAtivos();
-    const rendimentos = db.getRendimentos();
+  obterDadosPainel(userId) {
+    const ativos = db.getAtivos(userId);
+    const rendimentos = db.getRendimentos(userId);
 
     // Calcular total investido em ativos (quantidade * precoMedio)
     const totalInvestido = ativos.reduce((acc, ativo) => {

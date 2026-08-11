@@ -3,7 +3,7 @@ const rendimentosService = require('../services/rendimentosService');
 class RendimentosController {
   registrarRendimento(req, res) {
     try {
-      const novoRendimento = rendimentosService.registrarRendimento(req.body);
+      const novoRendimento = rendimentosService.registrarRendimento(req.body, req.user.id);
       return res.status(201).json(novoRendimento);
     } catch (error) {
       return res.status(400).json({ error: error.message });
@@ -12,7 +12,7 @@ class RendimentosController {
 
   listarRendimentos(req, res) {
     try {
-      const rendimentos = rendimentosService.listarRendimentos();
+      const rendimentos = rendimentosService.listarRendimentos(req.user.id);
       return res.status(200).json(rendimentos);
     } catch (error) {
       return res.status(500).json({ error: 'Erro interno ao listar rendimentos/aportes.' });

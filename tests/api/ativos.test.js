@@ -4,14 +4,28 @@ const app = require('../../src/app');
 const { restoreDatabase } = require('../helpers/databaseSnapshot');
 
 describe('API - Ativos', () => {
-  beforeEach(() => {
+  let token;
+
+  beforeEach(async () => {
     restoreDatabase();
+    
+    // Cadastra e autentica o usuário de teste
+    await request(app)
+      .post('/api/auth/register')
+      .send({ email: 'test@example.com', password: 'password123' });
+
+    const loginRes = await request(app)
+      .post('/api/auth/login')
+      .send({ email: 'test@example.com', password: 'password123' });
+
+    token = loginRes.body.token;
   });
 
   describe('POST /api/ativos', () => {
     it('deve cadastrar um ativo válido retornando status 201', async () => {
       const response = await request(app)
         .post('/api/ativos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           codigo: 'MXRF11',
           nome: 'Maxi Renda FII',
@@ -28,6 +42,7 @@ describe('API - Ativos', () => {
     it('deve retornar status 400 em caso de payload inválido', async () => {
       const response = await request(app)
         .post('/api/ativos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           codigo: '',
           nome: 'Maxi Renda FII',
@@ -45,6 +60,7 @@ describe('API - Ativos', () => {
       // Cadastra primeiro
       await request(app)
         .post('/api/ativos')
+        .set('Authorization', `Bearer ${token}`)
         .send({
           codigo: 'MXRF11',
           nome: 'Maxi Renda FII',
@@ -52,7 +68,9 @@ describe('API - Ativos', () => {
           precoMedio: 10.50
         });
 
-      const response = await request(app).get('/api/ativos');
+      const response = await request(app)
+        .get('/api/ativos')
+        .set('Authorization', `Bearer ${token}`);
 
       expect(response.status).to.equal(200);
       expect(response.body).to.be.an('array');

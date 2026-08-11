@@ -1,23 +1,45 @@
-// Banco de dados em memória simples para armazenar ativos e rendimentos/aportes.
+// Banco de dados em memória simples para armazenar usuários, ativos e rendimentos/aportes.
 
 const db = {
+  users: [],
   ativos: [],
   rendimentos: [],
+  nextUserId: 1,
   nextAtivoId: 1,
   nextRendimentoId: 1
 };
 
 module.exports = {
-  // Ativos helper functions
-  getAtivos: () => db.ativos,
+  // Usuários helper functions
+  getUsers: () => db.users,
   
-  getAtivoById: (id) => db.ativos.find(a => a.id === parseInt(id)),
+  getUserById: (id) => db.users.find(u => u.id === parseInt(id)),
   
-  getAtivoByCodigo: (codigo) => db.ativos.find(a => a.codigo.toUpperCase() === codigo.toUpperCase()),
+  getUserByEmail: (email) => db.users.find(u => u.email.toLowerCase() === email.toLowerCase()),
   
-  addAtivo: (ativo) => {
+  addUser: (user) => {
+    // BUG A: Não verifica se o e-mail já existe (permite e-mails duplicados)
+    const newUser = {
+      id: db.nextUserId++,
+      email: user.email,
+      password: user.password // BUG B: Salva a senha em texto plano, sem aplicar hash bcrypt
+    };
+    db.users.push(newUser);
+    return newUser;
+  },
+
+  // Ativos helper functions (com isolamento por userId)
+  getAtivos: (userId) => db.ativos.filter(a => a.userId === parseInt(userId)),
+  
+  getAtivoById: (id, userId) => db.ativos.find(a => a.id === parseInt(id) && a.userId === parseInt(userId)),
+  
+  getAtivoByCodigo: (codigo, userId) => 
+    db.ativos.find(a => a.codigo.toUpperCase() === codigo.toUpperCase() && a.userId === parseInt(userId)),
+  
+  addAtivo: (ativo, userId) => {
     const newAtivo = {
       id: db.nextAtivoId++,
+      userId: parseInt(userId),
       codigo: ativo.codigo.toUpperCase(),
       nome: ativo.nome,
       quantidade: parseFloat(ativo.quantidade),
@@ -27,8 +49,8 @@ module.exports = {
     return newAtivo;
   },
   
-  updateAtivo: (id, data) => {
-    const index = db.ativos.findIndex(a => a.id === parseInt(id));
+  updateAtivo: (id, data, userId) => {
+    const index = db.ativos.findIndex(a => a.id === parseInt(id) && a.userId === parseInt(userId));
     if (index === -1) return null;
     
     db.ativos[index] = {
@@ -40,12 +62,13 @@ module.exports = {
     return db.ativos[index];
   },
 
-  // Rendimentos helper functions
-  getRendimentos: () => db.rendimentos,
+  // Rendimentos helper functions (com isolamento por userId)
+  getRendimentos: (userId) => db.rendimentos.filter(r => r.userId === parseInt(userId)),
   
-  addRendimento: (rendimento) => {
+  addRendimento: (rendimento, userId) => {
     const newRendimento = {
       id: db.nextRendimentoId++,
+      userId: parseInt(userId),
       mes: rendimento.mes, // Formato esperado YYYY-MM
       tipo: rendimento.tipo, // 'rendimento' ou 'aporte'
       valor: parseFloat(rendimento.valor)
@@ -54,10 +77,12 @@ module.exports = {
     return newRendimento;
   },
 
-  // Para fins de teste/reset se necessário
+  // Para fins de teste/reset
   clearDb: () => {
+    db.users = [];
     db.ativos = [];
     db.rendimentos = [];
+    db.nextUserId = 1;
     db.nextAtivoId = 1;
     db.nextRendimentoId = 1;
   }

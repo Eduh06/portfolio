@@ -15,4 +15,10 @@ describe('Smoke - Aplicação', () => {
     expect(response.status).to.equal(200);
     expect(response.text).to.contain('<html');
   });
+
+  it('deve bloquear acesso a rota protegida (/api/ativos) sem token retornando status 401', async () => {
+    const response = await request(app).get('/api/ativos');
+    expect(response.status).to.equal(401);
+    expect(response.body).to.have.property('erro');
+  });
 });

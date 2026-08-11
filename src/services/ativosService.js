@@ -1,7 +1,7 @@
 const db = require('../models/db');
 
 class AtivosService {
-  cadastrarAtivo(data) {
+  cadastrarAtivo(data, userId) {
     const { codigo, nome, quantidade, precoMedio } = data;
 
     if (!codigo || typeof codigo !== 'string' || codigo.trim() === '') {
@@ -18,7 +18,7 @@ class AtivosService {
     }
 
     const codigoUpper = codigo.trim().toUpperCase();
-    const existing = db.getAtivoByCodigo(codigoUpper);
+    const existing = db.getAtivoByCodigo(codigoUpper, userId);
     if (existing) {
       // Se já existe, atualizamos adicionando à quantidade e calculando o novo preço médio ponderado
       const novaQuantidade = existing.quantidade + parseFloat(quantidade);
@@ -27,7 +27,7 @@ class AtivosService {
       return db.updateAtivo(existing.id, {
         quantidade: novaQuantidade,
         precoMedio: novoPrecoMedio
-      });
+      }, userId);
     }
 
     return db.addAtivo({
@@ -35,11 +35,11 @@ class AtivosService {
       nome: nome.trim(),
       quantidade: parseFloat(quantidade),
       precoMedio: parseFloat(precoMedio)
-    });
+    }, userId);
   }
 
-  listarAtivos() {
-    return db.getAtivos();
+  listarAtivos(userId) {
+    return db.getAtivos(userId);
   }
 }
 

@@ -12,15 +12,41 @@ export const options = {
   ],
   thresholds: {
     http_req_failed: ['rate<0.01'],   // Falhas < 1%
-    http_req_duration: ['p(95)<1000'], // 95% das requisições < 1000ms (1s) para evitar falhas falsas em VMs lentas
+    http_req_duration: ['p(95)<1000'], // 95% das requisições < 1000ms (1s)
   },
 };
 
 const BASE_URL = 'http://localhost:3000';
 
-export default function () {
+// A função setup roda uma única vez no início do teste de performance
+export function setup() {
+  const userPayload = JSON.stringify({
+    email: 'perf-user@example.com',
+    password: 'password123'
+  });
+  
+  const headers = { 'Content-Type': 'application/json' };
+
+  // Registra o usuário de performance
+  http.post(`${BASE_URL}/api/auth/register`, userPayload, { headers });
+
+  // Faz login para obter o token JWT
+  const loginRes = http.post(`${BASE_URL}/api/auth/login`, userPayload, { headers });
+  
+  // Extrai o token
+  const token = loginRes.json().token;
+  return token;
+}
+
+// O token retornado pelo setup é passado como argumento para cada VU
+export default function (token) {
+  const headers = { 
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  };
+
   // Cenário 1: GET /api/painel
-  const painelRes = http.get(`${BASE_URL}/api/painel`);
+  const painelRes = http.get(`${BASE_URL}/api/painel`, { headers });
   check(painelRes, {
     'status do painel é 200': (r) => r.status === 200,
     'tempo de resposta do painel < 200ms': (r) => r.timings.duration < 200,
@@ -36,7 +62,6 @@ export default function () {
     precoMedio: 15.50
   });
 
-  const headers = { 'Content-Type': 'application/json' };
   const ativoRes = http.post(`${BASE_URL}/api/ativos`, payload, { headers });
 
   check(ativoRes, {

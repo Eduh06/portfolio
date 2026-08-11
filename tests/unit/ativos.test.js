@@ -3,6 +3,8 @@ const ativosService = require('../../src/services/ativosService');
 const { restoreDatabase } = require('../helpers/databaseSnapshot');
 
 describe('Unit - Ativos Service', () => {
+  const userId = 1;
+
   beforeEach(() => {
     restoreDatabase();
   });
@@ -15,7 +17,7 @@ describe('Unit - Ativos Service', () => {
       precoMedio: 10.50
     };
 
-    const result = ativosService.cadastrarAtivo(data);
+    const result = ativosService.cadastrarAtivo(data, userId);
 
     expect(result).to.have.property('id');
     expect(result.codigo).to.equal('MXRF11');
@@ -31,7 +33,7 @@ describe('Unit - Ativos Service', () => {
       precoMedio: 10.50
     };
 
-    expect(() => ativosService.cadastrarAtivo(data)).to.throw(
+    expect(() => ativosService.cadastrarAtivo(data, userId)).to.throw(
       'Código do ativo é obrigatório e deve ser uma string válida.'
     );
   });
@@ -44,7 +46,7 @@ describe('Unit - Ativos Service', () => {
       precoMedio: 10.50
     };
 
-    expect(() => ativosService.cadastrarAtivo(data)).to.throw(
+    expect(() => ativosService.cadastrarAtivo(data, userId)).to.throw(
       'Quantidade deve ser um número maior que zero.'
     );
   });
@@ -57,7 +59,7 @@ describe('Unit - Ativos Service', () => {
       precoMedio: -5
     };
 
-    expect(() => ativosService.cadastrarAtivo(data)).to.throw(
+    expect(() => ativosService.cadastrarAtivo(data, userId)).to.throw(
       'Preço médio deve ser um número maior que zero.'
     );
   });
@@ -77,8 +79,8 @@ describe('Unit - Ativos Service', () => {
       precoMedio: 11.20
     };
 
-    ativosService.cadastrarAtivo(data1);
-    const result = ativosService.cadastrarAtivo(data2);
+    ativosService.cadastrarAtivo(data1, userId);
+    const result = ativosService.cadastrarAtivo(data2, userId);
 
     // Novo total: Qtd = 100 + 50 = 150
     // Preço Médio = ((100 * 10) + (50 * 11.2)) / 150 = (1000 + 560) / 150 = 1560 / 150 = 10.4

@@ -1,7 +1,7 @@
 const db = require('../models/db');
 
 class RendimentosService {
-  registrarRendimento(data) {
+  registrarRendimento(data, userId) {
     const { mes, tipo, valor } = data;
 
     // Validar mês (Formato AAAA-MM)
@@ -24,11 +24,11 @@ class RendimentosService {
       mes,
       tipo,
       valor: parseFloat(valor)
-    });
+    }, userId);
   }
 
-  listarRendimentos() {
-    return db.getRendimentos();
+  listarRendimentos(userId) {
+    return db.getRendimentos(userId);
   }
 }
 
