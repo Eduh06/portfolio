@@ -80,10 +80,46 @@ mindmap
 
 ## Endpoints da API
 
-A documentação interativa completa dos endpoints e seus modelos de erro (status code 400, 500) e sucesso está descrita no Swagger. Abaixo, um resumo rápido dos endpoints disponíveis:
+A documentação interativa completa de todos os endpoints, modelos de sucesso e códigos de erro (400, 401, 500) está descrita no Swagger. Abaixo, um resumo das rotas disponíveis:
 
-### 1. Ativos (`/api/ativos`)
-- **`POST /api/ativos`**: Cadastra um ativo ou categoria. Se o ativo já existir (mesmo código), adiciona a quantidade e calcula o novo preço médio ponderado automaticamente.
+### 1. Autenticação e Segurança (`/api/auth`)
+Antes de utilizar qualquer outra rota da API, é necessário cadastrar um usuário e obter o token JWT de acesso.
+
+- **`POST /api/auth/register`**: Cadastra um novo usuário no sistema.
+  - **Payload Exemplo**:
+    ```json
+    {
+      "email": "usuario@exemplo.com",
+      "password": "senha_secreta"
+    }
+    ```
+- **`POST /api/auth/login`**: Valida as credenciais e retorna o token de acesso.
+  - **Payload Exemplo**:
+    ```json
+    {
+      "email": "usuario@exemplo.com",
+      "password": "senha_secreta"
+    }
+    ```
+  - **Resposta Exemplo**:
+    ```json
+    {
+      "user": {
+        "id": 1,
+        "email": "usuario@exemplo.com"
+      },
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    }
+    ```
+
+> [!NOTE]
+> **Como autenticar as requisições**:
+> Para acessar as rotas de Ativos, Rendimentos e Painel, você deve enviar o cabeçalho HTTP:
+> `Authorization: Bearer <seu_token_jwt>`
+> *(No Swagger UI, utilize o botão "Authorize" no topo da página e cole o token retornado pelo login).*
+
+### 2. Ativos (`/api/ativos`)
+- **`POST /api/ativos`**: Cadastra um ativo ou categoria (Requer Autenticação). Se o ativo já existir (mesmo código), adiciona a quantidade e calcula o novo preço médio ponderado automaticamente para a carteira do usuário logado.
   - **Payload Exemplo**:
     ```json
     {
