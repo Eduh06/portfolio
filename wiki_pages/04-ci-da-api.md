@@ -17,11 +17,11 @@ Sempre que um novo código for enviado via `git push` ou um Pull Request for abe
 
 ---
 
-### 📈 Links dos Relatórios Online (Sempre Atualizados)
+### Links dos Relatórios Online (Sempre Atualizados)
 
 Graças ao deploy automatizado, qualquer pessoa pode acompanhar o resultado dos testes em tempo real através dos links públicos abaixo:
 
 *   **Relatório Funcional (Unitário, API e Fumaça)**: 
-    👉 [https://Eduh06.github.io/portfolio/](https://Eduh06.github.io/portfolio/)
+     [https://Eduh06.github.io/portfolio/](https://Eduh06.github.io/portfolio/)
 *   **Relatório de Carga e Performance (k6)**: 
-    👉 [https://Eduh06.github.io/portfolio/performance.html](https://Eduh06.github.io/portfolio/performance.html)
+     [https://Eduh06.github.io/portfolio/performance.html](https://Eduh06.github.io/portfolio/performance.html)

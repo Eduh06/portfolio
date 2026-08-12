@@ -4,7 +4,7 @@ Esta seção descreve os **Testes de API**, responsáveis por validar o funciona
 
 ---
 
-## 🎯 Objetivo e Escopo
+## Objetivo e Escopo
 Validar o comportamento dos endpoints Express.js (Request, Controllers, Services e Modelos) garantindo que retornem os **Status Codes** e payloads JSON esperados.
 
 ### Endpoints e Fluxos Validados:
@@ -14,12 +14,12 @@ Validar o comportamento dos endpoints Express.js (Request, Controllers, Services
 
 ---
 
-## 🧪 Isolamento do Banco de Dados
+## Isolamento do Banco de Dados
 Para garantir a independência de cada caso de teste, utilizamos a função `beforeEach` para executar o helper [databaseSnapshot.js](file:///c:/Users/EduardodosSantos/projetos/portfolio/tests/helpers/databaseSnapshot.js). Esse script limpa o estado de ativos e lançamentos em memória antes de cada execução.
 
 ---
 
-## 💻 Arquivos de Teste
+## Arquivos de Teste
 Os arquivos de testes de API encontram-se em:
 - [ativos.test.js](file:///c:/Users/EduardodosSantos/projetos/portfolio/tests/api/ativos.test.js)
 - [rendimentos.test.js](file:///c:/Users/EduardodosSantos/projetos/portfolio/tests/api/rendimentos.test.js)
@@ -27,13 +27,13 @@ Os arquivos de testes de API encontram-se em:
 
 ---
 
-## 📊 Relatório Mochawesome
+## Relatório Mochawesome
 Ao executar os testes de API, a ferramenta gera um relatório interativo contendo gráficos e logs de execução:
 - **Caminho do Relatório HTML**: `mochawesome-report/api/api-tests.html`
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 Rode o comando no terminal do projeto:
 ```bash
 npm run test:api

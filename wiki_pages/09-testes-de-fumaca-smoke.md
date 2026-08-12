@@ -4,7 +4,7 @@ Esta seção descreve os **Testes de Fumaça (Smoke Tests)**, cujo objetivo é v
 
 ---
 
-## 🎯 Objetivo e Escopo
+## Objetivo e Escopo
 Os testes de fumaça não validam lógica de negócio profunda; em vez disso, funcionam como um termômetro para certificar que o servidor está no ar e respondendo corretamente às rotas principais de infraestrutura.
 
 ### Pontos Validados:
@@ -13,13 +13,13 @@ Os testes de fumaça não validam lógica de negócio profunda; em vez disso, fu
 
 ---
 
-## 💻 Arquivo de Teste
+## Arquivo de Teste
 A suite de fumaça está localizada em:
 - [smoke.test.js](file:///c:/Users/EduardodosSantos/projetos/portfolio/tests/smoke/smoke.test.js)
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 Rode o comando no terminal do projeto:
 ```bash
 npm run test:smoke

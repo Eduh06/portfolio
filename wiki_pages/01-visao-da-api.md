@@ -12,7 +12,7 @@ A API do **Rastreador Simples de Metas e Aportes** concentra as regras de negóc
 
 ---
 
-### 🗺️ Mapa Mental da Estrutura
+### ️ Mapa Mental da Estrutura
 
 Abaixo está o mapa mental que ilustra como o projeto está estruturado entre componentes da aplicação, qualidade e documentação:
 

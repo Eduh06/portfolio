@@ -4,7 +4,7 @@ Este documento detalha as especificações de cada caso de teste (CT) implementa
 
 ---
 
-## 🛠️ Especificação dos Casos de Teste
+## ️ Especificação dos Casos de Teste
 
 ### CT-API-001: Cadastrar Ativo Válido
 *   **Camada**: API
