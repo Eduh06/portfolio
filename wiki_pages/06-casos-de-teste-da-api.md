@@ -101,3 +101,54 @@ Este documento detalha as especificações de cada caso de teste (CT) implementa
 *   **Resultado Esperado**: Retornar status \`200\` para a leitura do painel e \`201\` para os cadastros de ativos concorrentes. Toda a execução deve atender aos limites definidos (Thresholds):
     - Taxa de falhas de requisição HTTP (\`http_req_failed\`) menor do que 1%.
     - Tempo de resposta P95 (\`http_req_duration\`) menor do que 200ms.
+
+---
+
+### CT-API-012: Registrar Usuário Válido
+*   **Camada**: API / Unidade
+*   **Ação**: Enviar requisição `POST /api/auth/register` com e-mail e senha válidos.
+*   **Resultado Esperado**: Retornar status `201 Created` contendo o objeto de usuário criado (apenas com `id` e `email`, sem expor o campo `password`).
+
+---
+
+### CT-API-013: Rejeitar Registro de E-mail Duplicado
+*   **Camada**: Unidade
+*   **Pré-condições**: Usuário com o e-mail `dup@example.com` já cadastrado no banco.
+*   **Ação**: Tentar registrar um novo usuário com o mesmo e-mail `dup@example.com`.
+*   **Resultado Esperado**: Lançar um erro informando que o e-mail já está cadastrado.
+
+---
+
+### CT-API-014: Criptografia de Senha (Segurança)
+*   **Camada**: Unidade
+*   **Ação**: Registrar um usuário. Inspecionar o registro salvo no banco.
+*   **Resultado Esperado**: A senha salva no banco não deve ser igual à senha digitada em texto plano (deve estar convertida em hash seguro).
+
+---
+
+### CT-API-015: Login com Credenciais Válidas
+*   **Camada**: API / Unidade
+*   **Pré-condições**: Usuário cadastrado no sistema.
+*   **Ação**: Enviar requisição `POST /api/auth/login` com as credenciais válidas correspondentes.
+*   **Resultado Esperado**: Retornar status `200 OK` contendo os dados básicos do usuário e o token de acesso JWT.
+
+---
+
+### CT-API-016: Rejeitar Login com Credenciais Inválidas
+*   **Camada**: API
+*   **Ação**: Enviar requisição `POST /api/auth/login` com senha incorreta ou e-mail inexistente.
+*   **Resultado Esperado**: Retornar status `401 Unauthorized` informando erro de credenciais.
+
+---
+
+### CT-API-017: Bloquear Acesso a Rota Protegida sem Token
+*   **Camada**: Smoke / API
+*   **Ação**: Fazer requisição `GET /api/ativos` sem fornecer cabeçalhos de autenticação.
+*   **Resultado Esperado**: Retornar status `401 Unauthorized` com a mensagem `"Token de autenticação não fornecido."`.
+
+---
+
+### CT-API-018: Validação de Formato de E-mail no Cadastro
+*   **Camada**: API (Validação de Input)
+*   **Ação**: Enviar requisição `POST /api/auth/register` com e-mail sem formato válido (ex: `usuario_sem_arroba`).
+*   **Resultado Esperado**: Retornar status `400 Bad Request` indicando erro de formato de e-mail inválido.
