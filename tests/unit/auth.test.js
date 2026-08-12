@@ -22,7 +22,6 @@ describe('Unit - Serviço de Autenticação', () => {
     );
   });
 
-  // O teste abaixo FALHARÁ (Bug A) porque a API aceita e-mails duplicados
   it('deve rejeitar registro de e-mails duplicados', () => {
     const data = { email: 'dup@example.com', password: 'password123' };
     authService.registrarUsuario(data);
@@ -32,7 +31,6 @@ describe('Unit - Serviço de Autenticação', () => {
     );
   });
 
-  // O teste abaixo FALHARÁ (Bug B) porque salvamos a senha em texto plano no banco de dados
   it('deve salvar a senha de forma criptografada (hash)', () => {
     const data = { email: 'secure@example.com', password: 'password123' };
     authService.registrarUsuario(data);

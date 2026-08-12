@@ -13,8 +13,11 @@ module.exports = {
         return res.status(400).json({ erro: 'Senha é obrigatória e deve ser uma string.' });
       }
 
-      // BUG C: Não valida se o formato do e-mail é válido (ex: ter "@" e caracteres corretos)
-      // Apenas aceita qualquer texto que o usuário envie.
+      // Validação do formato do e-mail por expressão regular
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ erro: 'Formato de e-mail inválido.' });
+      }
 
       const user = authService.registrarUsuario({ email, password });
       return res.status(201).json(user);

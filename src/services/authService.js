@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const db = require('../models/db');
 
 // Chave secreta para assinatura dos tokens JWT
@@ -12,9 +13,15 @@ module.exports = {
       throw new Error('E-mail e senha são obrigatórios.');
     }
 
-    // BUG A: Não verifica se o e-mail já existe no db antes de criar.
-    // BUG B: Repassa a senha em texto limpo, sem aplicar hashing.
-    const user = db.addUser({ email, password });
+    // RESOLUÇÃO BUG A: Valida se o e-mail já existe no banco antes de cadastrar
+    const existingUser = db.getUserByEmail(email);
+    if (existingUser) {
+      throw new Error('E-mail já cadastrado.');
+    }
+
+    // RESOLUÇÃO BUG B: Criptografa a senha com hash seguro do bcrypt antes de salvar
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const user = db.addUser({ email, password: hashedPassword });
     
     return {
       id: user.id,
@@ -34,8 +41,9 @@ module.exports = {
       throw new Error('Credenciais inválidas.');
     }
 
-    // BUG B: Comparação direta de strings (texto plano), sem usar bcrypt.compare
-    if (user.password !== password) {
+    // RESOLUÇÃO BUG B: Compara o hash seguro da senha com a senha informada
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    if (!isPasswordValid) {
       throw new Error('Credenciais inválidas.');
     }
 

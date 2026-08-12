@@ -18,11 +18,10 @@ module.exports = {
   getUserByEmail: (email) => db.users.find(u => u.email.toLowerCase() === email.toLowerCase()),
   
   addUser: (user) => {
-    // BUG A: Não verifica se o e-mail já existe (permite e-mails duplicados)
     const newUser = {
       id: db.nextUserId++,
       email: user.email,
-      password: user.password // BUG B: Salva a senha em texto plano, sem aplicar hash bcrypt
+      password: user.password
     };
     db.users.push(newUser);
     return newUser;
