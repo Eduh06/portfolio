@@ -1,9 +1,9 @@
 total 128
-drwxr-xr-x 3 runner runner  4096 Aug 12 00:27 .
-drwxr-xr-x 3 runner runner  4096 Aug 12 00:27 ..
--rw-r--r-- 1 runner runner 38425 Aug 12 00:27 api-tests.html
--rw-r--r-- 1 runner runner 39241 Aug 12 00:27 api-tests.json
-drwxr-xr-x 2 runner runner  4096 Aug 12 00:27 assets
--rw-r--r-- 1 runner runner     0 Aug 12 00:27 files.log
--rw-r--r-- 1 runner runner  5313 Aug 12 00:27 k6-output.log
--rw-r--r-- 1 runner runner 24785 Aug 12 00:27 performance.html
+drwxr-xr-x 3 runner runner  4096 Aug 12 00:39 .
+drwxr-xr-x 3 runner runner  4096 Aug 12 00:38 ..
+-rw-r--r-- 1 runner runner 38423 Aug 12 00:39 api-tests.html
+-rw-r--r-- 1 runner runner 39239 Aug 12 00:39 api-tests.json
+drwxr-xr-x 2 runner runner  4096 Aug 12 00:39 assets
+-rw-r--r-- 1 runner runner     0 Aug 12 00:39 files.log
+-rw-r--r-- 1 runner runner  5313 Aug 12 00:39 k6-output.log
+-rw-r--r-- 1 runner runner 24785 Aug 12 00:39 performance.html
